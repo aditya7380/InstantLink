@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- The page cannot make network requests (connect-src 'none') and can only play blob: media: a selected video is never uploaded. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; media-src blob:; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>InstantLink</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>InstantLink</h1>
+    <button type="button" id="lang" class="link" aria-label="Change language"></button>
+  </header>
+
+  <section class="card" aria-labelledby="play-h">
+    <h2 id="play-h" data-i18n="playHeading"></h2>
+    <p data-i18n="playIntro"></p>
+
+    <div id="drop" class="drop" role="group" aria-labelledby="drop-h">
+      <p id="drop-h" class="hint" data-i18n="dropHint"></p>
+      <label class="btn primary" for="file" data-i18n="chooseBtn"></label>
+      <input id="file" class="visually-hidden" type="file" accept="video/*,audio/*,.mp4,.m4v,.mov,.webm,.mkv,.avi,.ogv,.mp3,.m4a,.wav,.ogg,.opus">
+    </div>
+
+    <p id="status" role="status" aria-live="polite" class="status" hidden></p>
+    <p id="error" role="alert" class="error" hidden></p>
+
+    <div id="player" hidden>
+      <video id="video" controls playsinline preload="metadata"></video>
+      <p id="meta" class="meta"></p>
+    </div>
+    <p class="note" data-i18n="privacyNote"></p>
+  </section>
+
+  <section class="card" aria-labelledby="share-h">
+    <h2 id="share-h" data-i18n="shareHeading"></h2>
+    <p data-i18n="shareBody"></p>
+    <p class="note" data-i18n="shareNote"></p>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

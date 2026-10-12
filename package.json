@@ -1,0 +1,84 @@
+{
+  "name": "instantlink",
+  "version": "0.1.0",
+  "description": "Turn a file on your computer into a share link without uploading it.",
+  "main": "dist-desktop/js/desktop/main.js",
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc",
+    "start": "tsx src/cli.ts serve",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.renderer.json && tsc -p tsconfig.desktop.json --noEmit",
+    "cli": "tsx src/cli.ts",
+    "lint": "eslint .",
+    "build:renderer": "vite build",
+    "build:main": "tsc -p tsconfig.desktop.json && esbuild desktop/preload.ts --bundle --platform=node --format=cjs --external:electron --outfile=dist-desktop/js/desktop/preload.cjs",
+    "build:desktop": "npm run build:renderer && npm run build:main",
+    "desktop": "npm run build:desktop && electron .",
+    "test:e2e": "npm run build:desktop && xvfb-run -a node e2e/desktop.e2e.mjs && npx tsx e2e/browser.e2e.ts && xvfb-run -a node e2e/electron-codec.e2e.mjs && npx tsx e2e/receiver.e2e.ts",
+    "dist": "npm run build:desktop && electron-builder --linux",
+    "dist:dir": "npm run build:desktop && electron-builder --linux dir",
+    "dist:win": "npm run build:desktop && electron-builder --win",
+    "web": "node scripts/serve-web.mjs"
+  },
+  "keywords": [],
+  "author": "InstantLink",
+  "license": "UNLICENSED",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@fastify/rate-limit": "^11.2.1",
+    "fastify": "^5.12.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3",
+    "eslint": "^10.12.0",
+    "playwright-core": "^1.64.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0",
+    "typescript-eslint": "^8.71.1",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.3"
+  },
+  "build": {
+    "appId": "app.instantlink.desktop",
+    "productName": "InstantLink",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist-desktop/**/*",
+      "package.json",
+      "!**/*.map"
+    ],
+    "asar": true,
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Network",
+      "maintainer": "InstantLink <noreply@example.invalid>"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "publish": null
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

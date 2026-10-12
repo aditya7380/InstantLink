@@ -1,0 +1,40 @@
+# dependencies and build output
+node_modules/
+dist/
+dist-desktop/
+release/
+
+# secrets and local data: NEVER commit
+.env
+.env.*
+!.env.example
+secret.key
+admin-key
+shares.json
+.instantlink-data/
+*.local
+
+# downloaded programs (the Windows guide tells you to put cloudflared.exe here)
+cloudflared
+cloudflared.exe
+*.exe
+*.AppImage
+
+# logs, OS and test leftovers
+*.log
+.DS_Store
+Thumbs.db
+e2e/desktop-screenshot.png
+node_modules/
+.env
+.env.*
+!.env.example
+cloudflared.exe
+*.mp4
+*.mkv
+*.mov
+*.avi
+dist/
+out/
+release/
+.DS_Store

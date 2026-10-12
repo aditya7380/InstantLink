@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "rootDir": ".", "outDir": "dist-desktop/js", "noEmit": false },
+  "include": ["src/**/*.ts", "desktop/core.ts", "desktop/main.ts", "desktop/api.ts", "desktop/preload.ts"]
+}
